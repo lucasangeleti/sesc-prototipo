@@ -357,7 +357,9 @@ footer img{width:150px;opacity:.8}
 
 /* ---------- animações ---------- */
 .rv{opacity:0}
-.rv.in{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both}
+.rv.in:not(.card){animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both}
+.card.rv{opacity:0;transition:opacity .5s ease}
+.card.rv.in{opacity:1}
 h1 .w{display:inline-block;opacity:0}
 h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay:calc(var(--i,0) * 70ms + 90ms)}
 .titulo .w{display:inline-block;opacity:0}
