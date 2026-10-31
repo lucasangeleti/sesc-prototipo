@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+.og{position:relative;width:1200px;height:630px;overflow:hidden;background:#060F0D;
+  font-family:Inter,sans-serif;color:#F0EEC6;display:flex;align-items:center;gap:54px;padding:0 60px}
+.og::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(700px 700px at 92% -14%, rgba(114,97,163,.55), transparent 62%),
+             radial-gradient(620px 620px at -6% 34%, rgba(221,45,74,.24), transparent 64%)}
+.logo{position:absolute;top:42px;left:60px;width:222px;z-index:2}
+.txt{position:relative;z-index:2;flex:1}
+.tag{display:inline-block;margin-bottom:16px;font-size:12.5px;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(240,238,198,.66)}
+.tag b{color:#F0F757;font-weight:600}
+h1{font-family:Fraunces,serif;font-weight:500;font-size:50px;line-height:1.06;margin:0 0 14px;letter-spacing:-.02em;max-width:19ch}
+h1 em{font-style:italic;font-weight:400}
+p{margin:0;font-size:18px;line-height:1.5;color:rgba(240,238,198,.8);max-width:26ch}
+.foto{position:relative;z-index:2;width:326px;height:408px;border-radius:20px;overflow:hidden;border:1px solid rgba(240,238,198,.16)}
+.foto img{width:100%;height:100%;object-fit:cover}
+.orb{position:absolute;z-index:3;left:815px;top:-40px;width:470px;height:710px}
+.orb ellipse{fill:none;stroke:rgba(240,238,198,.34);stroke-width:1}
+.pill{position:absolute;z-index:4;left:60px;bottom:44px;background:#F0F757;color:#0A1108;
+  font-weight:600;font-size:16px;padding:14px 26px;border-radius:999px}
+</style></head>
+<body>
+<div class="og">
+  <img class="logo" src="img/logo.svg" alt="">
+  <svg class="orb" viewBox="0 0 470 710" aria-hidden="true"><ellipse cx="235" cy="355" rx="228" ry="348"/><ellipse cx="235" cy="355" rx="176" ry="300" transform="rotate(-6 235 355)"/></svg>
+  <div class="txt">
+    <span class="tag"><b>&#10022;</b> Taróloga e terapeuta holística</span>
+    <h1>Clareza para seus <em>próximos passos</em>.</h1>
+    <p>Atendimentos online pelo WhatsApp. Mais de 10.000 atendimentos.</p>
+  </div>
+  <div class="foto"><img src="img/foto.jpg" alt=""></div>
+  <div class="pill">@luisa.soncim</div>
+</div>
+</body></html>
