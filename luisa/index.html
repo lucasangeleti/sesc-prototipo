@@ -85,7 +85,7 @@ h3{margin:0;font-size:19px;line-height:1.2}
 }
 
 /* ---------- fumaça ---------- */
-.fumaca{position:absolute;inset:-12% -18%;z-index:0;pointer-events:none;overflow:hidden}
+.fumaca{position:absolute;inset:-12% -18%;z-index:0;pointer-events:none;overflow:visible}
 .fumaca i{
   position:absolute;display:block;border-radius:50%;filter:blur(52px);
   background:radial-gradient(closest-side,rgba(240,238,198,.34),transparent 72%);
@@ -189,6 +189,7 @@ header img{width:196px;margin:0 auto}
 }
 .corte{
   position:absolute;left:0;bottom:0;width:100%;height:auto;z-index:3;pointer-events:none;
+  border-radius:0 0 20px 20px;
   filter:brightness(1.07) saturate(1.04);
 }
 .halo{
@@ -239,6 +240,25 @@ header img{width:196px;margin:0 auto}
   0%{transform:translateX(-130%) skewX(-16deg);opacity:1}
   100%{transform:translateX(430%) skewX(-16deg);opacity:1}
 }
+.btn-sec{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;
+  padding:0 22px;width:100%;max-width:420px;border-radius:999px;
+  border:1px solid rgba(240,238,198,.3);background:rgba(240,238,198,.03);color:var(--ink);
+  font-size:14.5px;font-weight:500;letter-spacing:.01em;text-decoration:none;
+  transition:border-color .2s ease,background .2s ease;
+}
+.btn-sec:hover{border-color:rgba(240,238,198,.6);background:rgba(240,238,198,.07)}
+.btn-sec:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.btn-sec svg{width:16px;height:16px;flex:none;opacity:.92}
+.btn-ig{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;width:56px;height:56px;
+  border-radius:50%;border:1px solid rgba(240,238,198,.34);background:rgba(12,26,22,.86);
+  backdrop-filter:blur(10px);color:var(--ink);text-decoration:none;
+  box-shadow:0 14px 40px rgba(0,0,0,.5);transition:border-color .2s ease,background .2s ease;
+}
+.btn-ig svg{width:22px;height:22px}
+.btn-ig:hover{border-color:rgba(240,238,198,.7);background:rgba(20,40,34,.94)}
+.btn-ig:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 
 /* ---------- faixa ---------- */
 .faixa{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -353,7 +373,78 @@ footer img{width:150px;opacity:.8}
   transform:translateY(120%);transition:transform .35s cubic-bezier(.2,.7,.3,1);
 }
 .barra.on{transform:none}
+.barra-linha{display:flex;align-items:center;gap:10px;max-width:1020px;margin:0 auto}
 .barra .btn{max-width:none;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+
+/* ---------- popup da leitura ---------- */
+html.folha-aberta{overflow:hidden}
+dialog.folha{
+  --c:#9C8FD6;
+  position:fixed;inset:auto 0 0 0;margin:0;padding:0;
+  width:100%;max-width:100%;
+  max-height:88vh;max-height:88dvh;
+  border:1px solid color-mix(in srgb, var(--c) 55%, transparent);border-bottom:0;
+  border-radius:22px 22px 0 0;
+  background:
+    radial-gradient(150% 90% at 100% 0%, color-mix(in srgb, var(--c) 26%, transparent), transparent 60%),
+    linear-gradient(180deg, rgba(240,238,198,.05), rgba(240,238,198,.012)),
+    #081512;
+  color:var(--ink);overflow:hidden;
+  box-shadow:0 -20px 60px rgba(0,0,0,.55);
+}
+dialog.folha::backdrop{background:rgba(4,10,9,.66);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog.folha[open]{animation:subir .34s cubic-bezier(.2,.75,.3,1) both}
+dialog.folha[open]::backdrop{animation:aparecer .34s ease both}
+@keyframes subir{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes aparecer{from{opacity:0}to{opacity:1}}
+.folha-puxa{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:44px;height:4px;border-radius:99px;background:rgba(240,238,198,.22)}
+.folha-x{
+  position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;color:var(--ink);
+  border:1px solid rgba(240,238,198,.3);background:rgba(12,26,22,.75);
+  transition:border-color .2s ease,background .2s ease;
+}
+.folha-x:hover{border-color:rgba(240,238,198,.65);background:rgba(20,40,34,.92)}
+.folha-x:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.folha-x svg{width:16px;height:16px}
+.folha-rolagem{overflow:auto;max-height:88vh;max-height:88dvh;overscroll-behavior:contain;padding:30px 18px 0}
+.folha-topo{display:flex;align-items:baseline;gap:10px;padding-right:52px;margin-bottom:4px}
+.folha-topo h3{font-family:Inter,sans-serif;font-weight:600;font-size:15.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);flex:1}
+.folha-topo h3:focus{outline:none}
+.folha-txt{margin:10px 0 0;font-size:15.5px;color:var(--ink-80);text-wrap:pretty}
+.folha-nota{margin:14px 0 0;font-size:13.8px;line-height:1.55;color:var(--ink-60);text-wrap:pretty}
+.folha-nota b{color:var(--ink-80);font-weight:600}
+.folha-foto{margin:16px 0 0;border-radius:16px;overflow:hidden;border:1px solid color-mix(in srgb, var(--c) 42%, transparent);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.folha-foto img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.folha-acoes{
+  position:sticky;bottom:0;display:grid;gap:8px;
+  margin-top:16px;padding:12px 0 calc(14px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, rgba(8,21,18,0), rgba(8,21,18,.94) 42%);
+}
+.folha-cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;width:100%;
+  border-radius:999px;background:var(--c);border:1px solid var(--c);color:#0A1108;
+  font-size:16.5px;font-weight:700;text-decoration:none;
+  transition:filter .2s ease,box-shadow .2s ease;
+}
+.folha-cta:hover{filter:brightness(1.07);box-shadow:0 12px 34px color-mix(in srgb, var(--c) 30%, transparent)}
+.folha-cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.folha-cta svg{width:17px;height:17px;flex:none;transition:transform .25s cubic-bezier(.2,.7,.3,1)}
+.folha-cta:hover svg{transform:translateX(3px)}
+.folha-duvida{
+  display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;
+  color:var(--ink-60);font-size:14px;font-weight:500;text-decoration:underline;
+  text-decoration-thickness:1px;text-underline-offset:4px;
+  text-decoration-color:color-mix(in srgb, var(--ink) 25%, transparent);
+  transition:color .2s ease,text-decoration-color .2s ease;
+}
+.folha-duvida:hover{color:var(--ink);text-decoration-color:color-mix(in srgb, var(--ink) 70%, transparent)}
+.folha-duvida:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media (min-width:860px){
+  dialog.folha{inset:0;margin:auto;width:min(540px,94vw);max-height:86vh;border-radius:26px;border-bottom:1px solid color-mix(in srgb, var(--c) 55%, transparent)}
+  .folha-rolagem{max-height:86vh;padding:32px 24px 0}
+  .folha-puxa{display:none}
+}
 
 /* ---------- animações ---------- */
 .rv{opacity:0}
@@ -404,6 +495,7 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
   .feixe{animation:none;opacity:.4}
   .halo{animation:none}
   .btn:hover::after{animation:none}
+  dialog.folha[open],dialog.folha[open]::backdrop{animation:none}
 }
 </style>
 </head>
@@ -450,6 +542,10 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
         Agendar minha consulta
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+      <a class="btn-sec" href="https://instagram.com/luisa.soncim" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+        @luisa.soncim no Instagram
+      </a>
     </div>
   </div>
 </div>
@@ -474,43 +570,43 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
 
     <div class="deck">
 
-      <a class="card rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20o%20atendimento%20de%20Perguntas%20%28R%24%2040%29." target="_blank" rel="noopener" style="--c:#9A86D9">
+      <a class="card rv" data-folha="perguntas" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20o%20atendimento%20de%20Perguntas%20%28R%24%2040%29." target="_blank" rel="noopener" style="--c:#9A86D9">
         <div class="linha"><span class="num">I</span><h3>Perguntas</h3><span class="preco"><small>R$</small>40</span></div>
         <p>Uma dúvida pontual, com resposta objetiva e direta. Retorno em até 48h.</p>
         <span class="go">Quero essa leitura <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
 
-      <a class="card rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Leitura%20Mensal%20%28R%24%2090%29." target="_blank" rel="noopener" style="--c:#7FC4E8">
+      <a class="card rv" data-folha="mensal" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Leitura%20Mensal%20%28R%24%2090%29." target="_blank" rel="noopener" style="--c:#7FC4E8">
         <div class="linha"><span class="num">II</span><h3>Leitura Mensal</h3><span class="preco"><small>R$</small>90</span></div>
         <p>As energias dos próximos 30 dias: profissional, sentimental e desenvolvimento pessoal.</p>
         <span class="go">Quero essa leitura <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
 
-      <a class="card rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20o%20Jogo%20dos%20Parceiros%20%28R%24%20135%29." target="_blank" rel="noopener" style="--c:#DD2D4A">
+      <a class="card rv" data-folha="parceiros" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20o%20Jogo%20dos%20Parceiros%20%28R%24%20135%29." target="_blank" rel="noopener" style="--c:#DD2D4A">
         <div class="linha"><span class="num">III</span><h3>Jogo dos Parceiros</h3><span class="preco"><small>R$</small>135</span></div>
         <p>Leitura com foco exclusivo na vida afetiva: o que está posto e o que pode mudar.</p>
         <span class="go">Quero essa leitura <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
 
-      <a class="card rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Leitura%20de%20Ciclo%20%28R%24%20140%29." target="_blank" rel="noopener" style="--c:#4E9B63">
+      <a class="card rv" data-folha="ciclo" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Leitura%20de%20Ciclo%20%28R%24%20140%29." target="_blank" rel="noopener" style="--c:#4E9B63">
         <div class="linha"><span class="num">IV</span><h3>Leitura de Ciclo</h3><span class="preco"><small>R$</small>140</span></div>
         <p>Análise numerológica do ciclo atual: saúde, social, financeiro, profissional, relacionamentos e espiritual. Inclui PDF com métodos holísticos e carta conselho.</p>
         <span class="go">Quero essa leitura <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
 
-      <a class="card rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20o%20Trono%20do%20Imperador%20%28R%24%20140%29." target="_blank" rel="noopener" style="--c:#E8A33D">
+      <a class="card rv" data-folha="imperador" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20o%20Trono%20do%20Imperador%20%28R%24%20140%29." target="_blank" rel="noopener" style="--c:#E8A33D">
         <div class="linha"><span class="num">V</span><h3>Trono do Imperador</h3><span class="preco"><small>R$</small>140</span></div>
         <p>Foco profissional: energia atual, obstáculos e caminhos de sucesso. Inclui aconselhamento profissional.</p>
         <span class="go">Quero essa leitura <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
 
-      <a class="card rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Cruz%20Celta%20%28R%24%20180%29." target="_blank" rel="noopener" style="--c:#8A6AD0">
+      <a class="card rv" data-folha="celta" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Cruz%20Celta%20%28R%24%20180%29." target="_blank" rel="noopener" style="--c:#8A6AD0">
         <div class="linha"><span class="num">VI</span><h3>Cruz Celta</h3><span class="preco"><small>R$</small>180</span></div>
         <p>Autoconhecimento profundo: passado, futuro, influências e bloqueios do seu momento.</p>
         <span class="go">Quero essa leitura <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
 
-      <a class="card destaque rv" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Mesa%20Real%20%28R%24%20250%29." target="_blank" rel="noopener" style="--c:#F0F757">
+      <a class="card destaque rv" data-folha="mesa" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20a%20Mesa%20Real%20%28R%24%20250%29." target="_blank" rel="noopener" style="--c:#F0F757">
         <span class="selo">Mais completo</span>
         <div class="linha"><span class="num">VII</span><h3>Mesa Real</h3><span class="preco"><small>R$</small>250</span></div>
         <p>Dois oráculos e todas as áreas da vida: profissional, amorosa, financeira e mais. Inclui PDF com dicas holísticas.</p>
@@ -585,6 +681,10 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
         Falar com a Luísa
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+      <a class="btn-sec" href="https://instagram.com/luisa.soncim" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+        Ver no Instagram
+      </a>
     </div>
   </div>
 </section>
@@ -597,7 +697,7 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
     <span class="links">
       <a href="https://instagram.com/luisa.soncim" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
-        Instagram
+        @luisa.soncim
       </a>
       <a href="https://wa.me/5521990798370" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.9 8.4c.3-.6.6-.6 1-.6h.6c.2 0 .4.1.6.5l.6 1.4c.1.3 0 .5-.2.7l-.5.5c-.1.2-.2.3-.1.5.3.6 1.4 1.8 2.2 2.1.2.1.4 0 .5-.1l.5-.6c.2-.2.4-.2.6-.1l1.4.7c.3.2.4.3.4.5 0 .5-.2 1.2-.7 1.5-.4.3-1 .4-1.7.2-1.9-.5-4-2.5-4.7-4.3-.2-.6-.2-1.3.1-1.9Z" fill="currentColor"/></svg>
@@ -609,11 +709,42 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
 </footer>
 
 <div class="barra" id="barra">
-  <a class="btn" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20agendar%20uma%20consulta." target="_blank" rel="noopener">
-    Agendar no WhatsApp
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
+  <div class="barra-linha">
+    <a class="btn" href="https://wa.me/5521990798370?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20agendar%20uma%20consulta." target="_blank" rel="noopener">
+      Agendar no WhatsApp
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a class="btn-ig" href="https://instagram.com/luisa.soncim" target="_blank" rel="noopener" aria-label="Instagram da Luísa Soncim">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+    </a>
+  </div>
 </div>
+
+<dialog class="folha" id="folha" aria-labelledby="folha-titulo" aria-describedby="folha-txt">
+  <span class="folha-puxa" aria-hidden="true"></span>
+  <button class="folha-x" id="folha-x" type="button" aria-label="Fechar a explicação">
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <div class="folha-rolagem">
+    <div class="folha-topo">
+      <span class="num" id="folha-num">I</span>
+      <h3 id="folha-titulo" tabindex="-1">Perguntas</h3>
+      <span class="preco" id="folha-preco"><small>R$</small>40</span>
+    </div>
+    <p class="folha-txt" id="folha-txt">Para quando a dúvida é uma só, sem precisar de uma leitura completa. Você envia a sua pergunta pelo WhatsApp e recebe uma resposta objetiva e direta, com retorno em até 48 horas.</p>
+    <figure class="folha-foto">
+      <img src="img/leitura.jpg" alt="Cartas de tarô usadas nas leituras" width="1020" height="680">
+    </figure>
+    <p class="folha-nota"><b>Como funciona:</b> o atendimento é pelo WhatsApp, com fotos e áudios ao longo da leitura. Agende com pelo menos 24 horas de antecedência.</p>
+    <div class="folha-acoes">
+      <a class="folha-cta" id="folha-cta" href="https://wa.me/5521990798370" target="_blank" rel="noopener">
+        Quero essa leitura
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.4M8.6 4 12.6 8l-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="folha-duvida" id="folha-duvida" href="https://wa.me/5521990798370" target="_blank" rel="noopener">Quero tirar uma dúvida sobre essa leitura</a>
+    </div>
+  </div>
+</dialog>
 
 <script>
 (function(){
@@ -649,6 +780,83 @@ h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay
   }
   window.addEventListener('scroll', checa, {passive:true});
   checa();
+})();
+</script>
+
+<script>
+(function(){
+  var LEITURAS = {
+    perguntas:{num:'I',nome:'Perguntas',preco:'40',cor:'#9A86D9',pedido:'o atendimento de Perguntas',
+      txt:'Para quando a dúvida é uma só, sem precisar de uma leitura completa. Você envia a sua pergunta pelo WhatsApp e recebe uma resposta objetiva e direta, com retorno em até 48 horas.'},
+    mensal:{num:'II',nome:'Leitura Mensal',preco:'90',cor:'#7FC4E8',pedido:'a Leitura Mensal',
+      txt:'Um panorama dos próximos 30 dias, para começar o mês sabendo onde estão as energias. A leitura passa pelo profissional, pelo sentimental e pelo desenvolvimento pessoal, com direcionamento para o período.'},
+    parceiros:{num:'III',nome:'Jogo dos Parceiros',preco:'135',cor:'#DD2D4A',pedido:'o Jogo dos Parceiros',
+      txt:'Uma leitura voltada só para a vida afetiva: o que está posto hoje e o que pode mudar. Para olhar para os seus relacionamentos com mais clareza.'},
+    ciclo:{num:'IV',nome:'Leitura de Ciclo',preco:'140',cor:'#4E9B63',pedido:'a Leitura de Ciclo',
+      txt:'Uma análise numerológica do seu ciclo atual, área por área: saúde, social, financeiro, profissional, relacionamentos e espiritual. Além da leitura, chegam um PDF com métodos holísticos e uma carta conselho.'},
+    imperador:{num:'V',nome:'Trono do Imperador',preco:'140',cor:'#E8A33D',pedido:'o Trono do Imperador',
+      txt:'Uma leitura com foco no trabalho: a energia do seu momento profissional, os obstáculos no caminho e os caminhos de sucesso. Inclui um aconselhamento profissional.'},
+    celta:{num:'VI',nome:'Cruz Celta',preco:'180',cor:'#8A6AD0',pedido:'a Cruz Celta',
+      txt:'A tiragem clássica do tarô para autoconhecimento profundo: passado, futuro, influências e bloqueios do seu momento. Uma leitura para entender a sua história e o que se move agora.'},
+    mesa:{num:'VII',nome:'Mesa Real',preco:'250',cor:'#F0F757',pedido:'a Mesa Real',
+      txt:'A leitura mais completa: dois oráculos e todas as áreas da vida, do profissional ao amoroso, do financeiro ao espiritual. Inclui um PDF com dicas holísticas.'}
+  };
+  var folha = document.getElementById('folha');
+  if(!folha || typeof folha.showModal !== 'function') return;
+
+  var elNum = document.getElementById('folha-num'),
+      elTit = document.getElementById('folha-titulo'),
+      elPre = document.getElementById('folha-preco'),
+      elTxt = document.getElementById('folha-txt'),
+      elCta = document.getElementById('folha-cta'),
+      elDuv = document.getElementById('folha-duvida');
+  var NUM = 'https://wa.me/5521990798370?text=';
+
+  // cor do texto do botão: escolhe preto ou branco, o que contrasta mais com a cor da leitura
+  function corDoTexto(hex){
+    function lum(h){
+      var m = /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/i.exec(h);
+      var c = [1,2,3].map(function(i){ var v = parseInt(m[i],16)/255; return v <= .04045 ? v/12.92 : Math.pow((v+.055)/1.055, 2.4); });
+      return .2126*c[0] + .7152*c[1] + .0722*c[2];
+    }
+    var l = lum(hex), escuro = lum('#0A1108');
+    var cEscuro = (Math.max(l,escuro)+.05)/(Math.min(l,escuro)+.05);
+    var cClaro = 1.05/(l+.05);
+    return cClaro > cEscuro ? '#FFFFFF' : '#0A1108';
+  }
+
+  function abrir(id){
+    var d = LEITURAS[id]; if(!d) return;
+    folha.style.setProperty('--c', d.cor);
+    elNum.textContent = d.num;
+    elTit.textContent = d.nome;
+    elPre.innerHTML = '<small>R$</small>' + d.preco;
+    elTxt.textContent = d.txt;
+    elCta.style.color = corDoTexto(d.cor);
+    elCta.href = NUM + encodeURIComponent('Olá! Vim pelo site e quero ' + d.pedido + ' (R$ ' + d.preco + ').');
+    elDuv.href = NUM + encodeURIComponent('Olá! Vim pelo site e quero tirar uma dúvida sobre ' + d.pedido + '.');
+    document.documentElement.classList.add('folha-aberta');
+    if(!folha.open) folha.showModal();
+    elTit.focus();
+  }
+  function fechar(){ folha.close(); }
+
+  folha.addEventListener('close', function(){ document.documentElement.classList.remove('folha-aberta'); });
+  folha.addEventListener('click', function(e){
+    if(e.target !== folha) return;
+    var r = folha.getBoundingClientRect();
+    if(e.clientX <= r.left || e.clientX >= r.right || e.clientY <= r.top || e.clientY >= r.bottom) fechar();
+  });
+  document.getElementById('folha-x').addEventListener('click', fechar);
+
+  document.querySelectorAll('.card[data-folha]').forEach(function(c){
+    c.setAttribute('aria-haspopup','dialog');
+    c.addEventListener('click', function(e){
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      abrir(c.getAttribute('data-folha'));
+    });
+  });
 })();
 </script>
 </body>
