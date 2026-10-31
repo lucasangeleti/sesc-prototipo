@@ -11,9 +11,11 @@
 <meta property="og:description" content="Clareza para seus próximos passos. Atendimentos online pelo WhatsApp.">
 <meta property="og:image" content="img/og.jpg">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="img/favicon.ico" sizes="any">
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="img/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -54,9 +56,7 @@ a{color:inherit}
 h1,h2,h3,.preco,.eyebrow,.num{font-family:Fraunces,Georgia,serif;font-weight:500;letter-spacing:-.01em}
 h1{margin:0;font-size:clamp(32px,9.6vw,48px);line-height:1.06;text-wrap:balance;
   transition:font-weight .32s cubic-bezier(.2,.7,.3,1)}
-h1:hover{font-weight:700}
 h1 .it{transition:font-weight .32s cubic-bezier(.2,.7,.3,1)}
-h1:hover .it{font-weight:600}
 h1 .it,h1 em{
   font-style:italic;font-weight:400;color:#EDABB9;
   text-shadow:0 0 30px rgba(237,171,185,.35),0 0 12px rgba(237,171,185,.18);
@@ -163,8 +163,12 @@ header img{width:196px;margin:0 auto}
 .hero{padding-block:40px 34px;text-align:center}
 .hero-art{position:relative;z-index:2;margin:0 auto 22px;max-width:250px}
 .zoom{position:relative;transition:transform .6s cubic-bezier(.2,.7,.3,1);will-change:transform}
-.hero-art:hover .zoom,
-.hero-art:focus-within .zoom{transform:scale(1.035)}
+@media (hover:hover){
+  .hero-art:hover .zoom,
+  .hero-art:focus-within .zoom{transform:scale(1.03)}
+  h1:hover{font-weight:700}
+  h1:hover .it{font-weight:600}
+}
 .fio-foto{
   position:absolute;inset:-15px;z-index:1;pointer-events:none;
   border:1.6px solid rgba(198,48,58,.80);border-radius:70px 70px 35px 35px;
@@ -178,6 +182,11 @@ header img{width:196px;margin:0 auto}
   box-shadow:0 0 110px rgba(255,176,110,.14),0 0 40px rgba(255,150,90,.10);
 }
 .pic img{position:absolute;left:0;top:0;width:100%;height:auto;transform:translateY(-11.34%)}
+@keyframes bounce{
+  0%{opacity:0;transform:translateY(18px) scale(.965)}
+  58%{opacity:1;transform:translateY(-4px) scale(1.007)}
+  100%{opacity:1;transform:none}
+}
 .corte{
   position:absolute;left:0;bottom:0;width:100%;height:auto;z-index:3;pointer-events:none;
   filter:brightness(1.07) saturate(1.04);
@@ -254,6 +263,14 @@ section{padding:38px 0}
   transition:border-color .22s ease,transform .22s ease,box-shadow .22s ease;
 }
 .card:hover{border-color:color-mix(in srgb, var(--c) 85%, transparent);box-shadow:0 18px 44px rgba(0,0,0,.42)}
+@keyframes salto{
+  0%{transform:translateY(0)}
+  38%{transform:translateY(-7px)}
+  72%{transform:translateY(1px)}
+  100%{transform:translateY(0)}
+}
+/* o pulinho vale no mouse e no toque: é animação de ida, não fica presa */
+.card:hover{animation:salto .44s cubic-bezier(.22,.9,.32,1.2) both}
 .card:hover .go{background:var(--c);color:#0A1108;border-color:var(--c)}
 .card:hover .go svg{transform:translateX(3px)}
 .card:focus-visible{outline:2px solid var(--c);outline-offset:3px}
@@ -339,16 +356,12 @@ footer img{width:150px;opacity:.8}
 .barra .btn{max-width:none;box-shadow:0 14px 40px rgba(0,0,0,.5)}
 
 /* ---------- animações ---------- */
-.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
-.rv.in{opacity:1;transform:none}
-h1 .w{display:inline-block;opacity:0;transform:translateY(.44em) rotate(1.5deg);
-  transition:opacity .8s ease,transform .9s cubic-bezier(.2,.75,.25,1);
-  transition-delay:calc(var(--i,0) * 80ms + 120ms)}
-h1.in .w{opacity:1;transform:none}
-.titulo .w{display:inline-block;opacity:0;transform:translateY(.5em);
-  transition:opacity .7s ease,transform .8s cubic-bezier(.2,.75,.25,1);
-  transition-delay:calc(var(--i,0) * 55ms)}
-.titulo.in .w{opacity:1;transform:none}
+.rv{opacity:0}
+.rv.in{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both}
+h1 .w{display:inline-block;opacity:0}
+h1.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay:calc(var(--i,0) * 70ms + 90ms)}
+.titulo .w{display:inline-block;opacity:0}
+.titulo.in .w{animation:bounce .62s cubic-bezier(.22,.85,.3,1.1) both;animation-delay:calc(var(--i,0) * 70ms)}
 
 @media (min-width:860px){
   :root{--pad:26px}
@@ -370,9 +383,18 @@ h1.in .w{opacity:1;transform:none}
   footer{padding-bottom:36px}
   footer .wrap{grid-template-columns:auto 1fr auto;justify-items:start;text-align:left;align-items:center;gap:22px}
 }
+/* movimento só no bounce: as camadas de clima ficam paradas */
+.fumaca i:nth-child(n),
+.luzes i:nth-child(n),
+.raios,
+.feixe,
+.halo,
+.orbe{animation:none}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .rv,h1 .w,.titulo .w{opacity:1;transform:none;transition:none}
+  .rv,h1 .w,.titulo .w{opacity:1;transform:none;transition:none;animation:none}
+  .rv.in,.titulo.in .w,h1.in .w{animation:none}
   .orbe{animation:none;opacity:.75}
   .fumaca i{animation:none}
   .luzes i{animation:none;opacity:.6}
