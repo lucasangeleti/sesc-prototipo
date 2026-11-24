@@ -1,7 +1,7 @@
-# Sesc com vc · protótipo v2
+# protótipo encerrado (arquivado)
 
-App navegável (direção A) do estudo de reformulação do app **Sesc com vc**.
+O protótipo do app **Sesc com vc** que ficava neste endereço saiu do ar em 24/11/2026, a pedido do autor.
 
-- **Abrir:** https://prototipo.lucasangeleti.com.br/ (ou o `index.html` da raiz)
-- Protótipo de estudo. Dados, pessoas e credenciais são **fictícios**.
-- Menu de bastidores: `menu.html` (versão B e comparativos).
+- Não há mais página publicada na raiz deste domínio.
+- O material do estudo está arquivado fora daqui (backup local em `/opt/data/backups/sesc-offline-20261124`).
+- Este repositório segue hospedando apenas a landing de reserva da Luísa Soncim em `/luisa/` (a versão oficial dela é https://luisasoncim.com.br).
